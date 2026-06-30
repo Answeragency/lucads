@@ -311,6 +311,7 @@ section { position: relative; }
   font-size: 0.85rem;
   color: var(--text-dark-secondary);
   text-align: center;
+  margin-top: var(--space-3);
 }
 
 /* ============================================================
