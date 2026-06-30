@@ -859,9 +859,38 @@ section { position: relative; }
   .hero-cta-group { flex-direction: column; align-items: center; gap: var(--space-2); }
   .hero-cta-group .btn { width: 100%; max-width: 280px; padding: 12px 20px; }
   .hero-microcopy { margin-top: var(--space-2); font-size: 0.78rem; }
-  .steps { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: var(--space-2); }
+  .services-grid { grid-template-columns: 1fr; gap: var(--space-2); }
   .service-card.full { grid-column: span 1; flex-direction: column; }
   .commitments { grid-template-columns: 1fr; }
-  .proof-row { grid-template-columns: 1fr; gap: var(--space-3); }
+  .proof-row { grid-template-columns: 1fr; gap: var(--space-2); margin-top: var(--space-3); }
+
+  /* Compaction générale mobile : moins de scroll, sections plus denses */
+  .section-pad { padding: var(--space-5) 0; }
+  .section-head { margin: 0 auto var(--space-3); }
+  .section-head h2 { font-size: 1.4rem; }
+  .section-head p { font-size: 0.92rem; margin-top: var(--space-1); }
+
+  .problem-grid { gap: var(--space-2); }
+  .problem-card, .step, .service-card { padding: var(--space-3); }
+  .problem-card h3, .step h3, .service-card h3 { font-size: 1rem; }
+  .problem-card p, .step p, .service-card p { font-size: 0.88rem; }
+
+  .about-grid { gap: var(--space-3); }
+  .about-photo { max-width: 220px; }
+  .about-text p { font-size: 0.92rem; }
+  .proof-item .value { font-size: 1.15rem; }
+  .commitments { margin-top: var(--space-3); gap: var(--space-1); }
+  .commitment-item { font-size: 0.85rem; }
+
+  .faq-list { margin-top: 0; }
+  .faq-question { font-size: 0.95rem; padding: var(--space-2) 0; }
+  .faq-answer { font-size: 0.88rem; padding-bottom: var(--space-2); }
+
+  .cta-final { padding: var(--space-5) 0; }
+  .cta-final h2 { font-size: 1.5rem; }
+  .cta-final p { font-size: 0.92rem; margin-bottom: var(--space-3); }
+
+  .site-footer { padding: var(--space-3) 0; }
+  .footer-bottom { margin-top: var(--space-3); padding-top: var(--space-2); }
 }
