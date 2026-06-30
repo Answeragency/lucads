@@ -697,7 +697,7 @@ section { position: relative; }
 .cta-final p { max-width: 540px; margin: 0 auto var(--space-4); color: var(--text-dark-secondary); }
 .cta-final .btn-row { display: flex; justify-content: center; gap: var(--space-3); flex-wrap: wrap; }
 .contact-direct {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   font-size: 0.9rem;
   color: var(--text-dark-secondary);
 }
