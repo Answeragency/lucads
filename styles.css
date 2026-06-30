@@ -845,7 +845,9 @@ section { position: relative; }
     border-bottom: 1px solid var(--border-dark);
   }
   .nav-toggle { display: flex; }
-  .hero { padding: 140px 0 var(--space-6); }
+  .hero { padding: 120px 0 var(--space-5); }
+  .hero-photo { max-width: 180px; margin-bottom: var(--space-2); }
+  .hero-badge { width: 60px; height: 60px; font-size: 0.55rem; padding: 6px; }
   .steps { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
   .service-card.full { grid-column: span 1; flex-direction: column; }
