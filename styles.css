@@ -526,10 +526,11 @@ section { position: relative; }
    ============================================================ */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-3);
 }
 .service-card {
+  grid-column: span 2;
   border: 1px solid var(--border-light);
   border-radius: 6px;
   padding: var(--space-4);
@@ -539,6 +540,8 @@ section { position: relative; }
   align-items: center;
   transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
+.service-card:nth-child(4) { grid-column: 2 / span 2; }
+.service-card:nth-child(5) { grid-column: 4 / span 2; }
 .service-card:hover {
   border-color: var(--accent-dim);
   transform: translateY(-6px);
@@ -562,7 +565,7 @@ section { position: relative; }
 .service-card h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
 .service-card p { font-size: 0.95rem; }
 .service-card.full {
-  grid-column: span 3;
+  grid-column: span 6;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -786,6 +789,8 @@ section { position: relative; }
   .problem-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .service-card { grid-column: span 1; }
+  .service-card:nth-child(4), .service-card:nth-child(5) { grid-column: span 1; }
   .service-card.full { grid-column: span 2; }
   .about-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 320px; margin: 0 auto; }
