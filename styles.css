@@ -408,14 +408,14 @@ section { position: relative; }
   flex-shrink: 0;
 }
 .hero-badge-1 {
-  top: 0;
-  left: 0;
+  top: 10%;
+  left: 10%;
   transform: translate(-50%, -50%);
   animation: badge-float-1 5s ease-in-out infinite;
 }
 .hero-badge-2 {
-  bottom: 0;
-  right: 0;
+  bottom: 10%;
+  right: 10%;
   transform: translate(50%, 50%);
   animation: badge-float-2 6s ease-in-out infinite;
 }
