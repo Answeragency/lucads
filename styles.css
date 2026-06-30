@@ -850,9 +850,11 @@ section { position: relative; }
   .nav-toggle { display: flex; }
   .hero { min-height: auto; padding: 96px 0 var(--space-4); }
   .hero-photo { max-width: 130px; margin-bottom: 0; }
-  .hero-grid { gap: var(--space-2); }
+  .hero-grid { gap: var(--space-5); }
   .hero-badge { width: 56px; height: 56px; font-size: 0.44rem; line-height: 1.05; padding: 5px; gap: 1px; }
   .hero-badge-dot { width: 4px; height: 4px; }
+  .hero-badge-1 { top: 14%; left: 14%; }
+  .hero-badge-2 { bottom: 14%; right: 14%; }
   .eyebrow { margin-bottom: var(--space-1); font-size: 0.7rem; }
   .hero h1 { font-size: 1.6rem; margin-bottom: var(--space-2); }
   .hero-subtitle { font-size: 0.9rem; margin-bottom: var(--space-2); }
