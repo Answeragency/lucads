@@ -401,6 +401,9 @@ section { position: relative; }
   line-height: 1.2;
   color: var(--text-dark);
   text-align: center;
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
   box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
   white-space: normal;
 }
@@ -847,7 +850,8 @@ section { position: relative; }
   .nav-toggle { display: flex; }
   .hero { padding: 120px 0 var(--space-5); }
   .hero-photo { max-width: 180px; margin-bottom: var(--space-2); }
-  .hero-badge { width: 60px; height: 60px; font-size: 0.55rem; padding: 6px; }
+  .hero-badge { width: 68px; height: 68px; font-size: 0.5rem; line-height: 1.1; padding: 6px; gap: 2px; }
+  .hero-badge-dot { width: 5px; height: 5px; }
   .steps { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
   .service-card.full { grid-column: span 1; flex-direction: column; }
