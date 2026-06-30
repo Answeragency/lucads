@@ -292,9 +292,9 @@ section { position: relative; }
   color: var(--text-dark);
   margin-bottom: var(--space-3);
 }
-.hero h1 .h1-light {
+.hero h1 .h1-thin {
   color: var(--text-dark-secondary);
-  font-weight: 600;
+  font-weight: 300;
 }
 .hero h1 .h1-accent {
   color: var(--accent);
