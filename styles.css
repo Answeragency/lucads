@@ -390,13 +390,13 @@ section { position: relative; }
   flex-shrink: 0;
 }
 .hero-badge-1 {
-  top: 8%;
-  left: -14%;
+  top: 4%;
+  left: -26%;
   animation: badge-float-1 5s ease-in-out infinite;
 }
 .hero-badge-2 {
-  bottom: 10%;
-  right: -10%;
+  bottom: 6%;
+  right: -22%;
   animation: badge-float-2 6s ease-in-out infinite;
 }
 
