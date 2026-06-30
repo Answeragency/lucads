@@ -339,29 +339,41 @@ section { position: relative; }
 
 .hero-photo-ring {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 112%;
-  height: 112%;
-  transform: translate(-50%, -50%);
-  border: 1.5px dashed var(--border-dark);
-  border-radius: 50%;
-  animation: ring-spin 26s linear infinite;
+  top: -6%;
+  left: -8%;
+  width: 88%;
+  height: 88%;
+  background: linear-gradient(135deg, var(--accent), #1c3f8f);
+  border-radius: 44% 56% 62% 38% / 40% 44% 56% 60%;
+  transform: rotate(-7deg);
+  animation: brush-morph 12s ease-in-out infinite;
+  opacity: 0.9;
 }
 
 .hero-photo-frame {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: 42% 58% 65% 35% / 48% 38% 62% 52%;
   overflow: hidden;
   border: 1px solid var(--border-dark);
   box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55);
+  animation: brush-morph 12s ease-in-out infinite;
+  animation-delay: 0.3s;
 }
 .hero-photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: grayscale(100%) contrast(1.05);
+}
+.hero-photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(79, 141, 255, 0.35), rgba(11, 13, 16, 0.15) 55%, rgba(79, 141, 255, 0.25));
+  mix-blend-mode: color;
+  pointer-events: none;
 }
 
 .hero-badge {
@@ -412,9 +424,10 @@ section { position: relative; }
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(-14px, 18px) scale(1.08); }
 }
-@keyframes ring-spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes brush-morph {
+  0%, 100% { border-radius: 42% 58% 65% 35% / 48% 38% 62% 52%; }
+  33% { border-radius: 58% 42% 38% 62% / 35% 60% 40% 65%; }
+  66% { border-radius: 35% 65% 55% 45% / 60% 45% 55% 40%; }
 }
 @keyframes badge-float-1 {
   0%, 100% { transform: translate(-50%, -50%) translateY(0); }
@@ -775,7 +788,7 @@ section { position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .hero-panel-row { opacity: 1; transform: none; transition: none; }
   .btn:hover, .service-card:hover, .problem-card:hover, .step:hover { transform: none; }
-  .hero-photo-blob, .hero-photo-ring, .hero-badge-1, .hero-badge-2, .hero-badge-dot { animation: none; }
+  .hero-photo-blob, .hero-photo-ring, .hero-photo-frame, .hero-badge-1, .hero-badge-2, .hero-badge-dot { animation: none; }
   html { scroll-behavior: auto; }
 }
 
