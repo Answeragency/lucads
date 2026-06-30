@@ -848,15 +848,20 @@ section { position: relative; }
     border-bottom: 1px solid var(--border-dark);
   }
   .nav-toggle { display: flex; }
-  .hero { padding: 120px 0 var(--space-5); }
-  .hero-photo { max-width: 180px; margin-bottom: 0; }
+  .hero { min-height: auto; padding: 96px 0 var(--space-4); }
+  .hero-photo { max-width: 130px; margin-bottom: 0; }
   .hero-grid { gap: var(--space-2); }
-  .hero-badge { width: 68px; height: 68px; font-size: 0.5rem; line-height: 1.1; padding: 6px; gap: 2px; }
-  .hero-badge-dot { width: 5px; height: 5px; }
+  .hero-badge { width: 56px; height: 56px; font-size: 0.44rem; line-height: 1.05; padding: 5px; gap: 1px; }
+  .hero-badge-dot { width: 4px; height: 4px; }
+  .eyebrow { margin-bottom: var(--space-1); font-size: 0.7rem; }
+  .hero h1 { font-size: 1.6rem; margin-bottom: var(--space-2); }
+  .hero-subtitle { font-size: 0.9rem; margin-bottom: var(--space-2); }
+  .hero-cta-group { flex-direction: column; align-items: center; gap: var(--space-2); }
+  .hero-cta-group .btn { width: 100%; max-width: 280px; padding: 12px 20px; }
+  .hero-microcopy { margin-top: var(--space-2); font-size: 0.78rem; }
   .steps { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
   .service-card.full { grid-column: span 1; flex-direction: column; }
   .commitments { grid-template-columns: 1fr; }
   .proof-row { grid-template-columns: 1fr; gap: var(--space-3); }
-  .hero-cta-group { flex-direction: column; align-items: center; }
 }
