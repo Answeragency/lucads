@@ -184,11 +184,6 @@
           <h3>TikTok Ads</h3>
           <p class="text-secondary">Formats natifs et créatifs pensés pour une plateforme aux codes spécifiques.</p>
         </div>
-        <div class="service-card reveal">
-          <div class="icon">Cs</div>
-          <h3>Content Strategy</h3>
-          <p class="text-secondary">Calendrier de contenu et création de visuels/vidéos alignés sur vos campagnes pub.</p>
-        </div>
         <div class="service-card full reveal">
           <div class="icon">+</div>
           <div>
@@ -206,7 +201,10 @@
   <section class="bg-light-soft section-pad" id="apropos">
     <div class="container about-grid">
       <div class="about-photo reveal">
-        <img src="assets/photo-profil.jpg" alt="Portrait de Lucas Marchetti, media buyer et content strategist" loading="lazy" width="800" height="1000">
+        <div class="about-photo-blob" aria-hidden="true"></div>
+        <div class="about-photo-frame">
+          <img src="assets/photo-profil.jpg" alt="Portrait de Lucas Marchetti, media buyer et content strategist" loading="lazy" width="800" height="1000">
+        </div>
       </div>
       <div class="about-text reveal">
         <p class="eyebrow">Qui suis-je</p>
@@ -267,7 +265,7 @@
         </details>
         <details class="faq-item reveal">
           <summary class="faq-question">Qui s'occupe de créer les visuels et vidéos ? <span class="plus">+</span></summary>
-          <div class="faq-answer">Je m'en occupe directement dans le cadre de la prestation de content strategy, en cohérence avec la stratégie publicitaire en cours.</div>
+          <div class="faq-answer">La création de visuels et vidéos est proposée en option, en complément du pilotage publicitaire, selon vos besoins et le devis établi ensemble.</div>
         </details>
         <details class="faq-item reveal">
           <summary class="faq-question">Comment se passe le suivi des résultats ? <span class="plus">+</span></summary>
@@ -320,6 +318,9 @@
 <a href="https://wa.me/33756906702?text=Bonjour%20Lucas%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contacter Lucas Marchetti sur WhatsApp">
   <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
 </a>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
 
 <script>
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
