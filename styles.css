@@ -624,7 +624,6 @@ body.has-custom-cursor .cursor-ring {
   align-items: center;
   transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-.service-card:nth-child(4) { grid-column: 3 / span 2; }
 .service-card:hover {
   border-color: var(--accent-dim);
   transform: translateY(-6px);
@@ -904,7 +903,6 @@ body.has-custom-cursor .cursor-ring {
   .steps { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .service-card { grid-column: span 1; }
-  .service-card:nth-child(4) { grid-column: span 1; }
   .service-card.full { grid-column: span 2; }
   .about-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 320px; margin: 0 auto; }
