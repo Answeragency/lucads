@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const canCustomCursor = !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches;
 
   if (canCustomCursor) {
-    document.body.classList.add('has-custom-cursor');
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
 
@@ -55,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let ringY = mouseY;
 
     window.addEventListener('mousemove', (e) => {
+      // Affiché seulement après le premier mouvement, sinon l'anneau reste figé au centre
+      if (!document.body.classList.contains('has-custom-cursor')) {
+        ringX = e.clientX;
+        ringY = e.clientY;
+        document.body.classList.add('has-custom-cursor');
+      }
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursorDot.style.left = `${mouseX}px`;

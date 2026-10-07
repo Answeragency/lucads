@@ -24,6 +24,9 @@
   --space-7: 96px;
   --space-8: 128px;
 
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
   --max-width: 1180px;
   --radius: 4px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -34,7 +37,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 
 body {
-  font-family: "Manrope", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-light);
@@ -50,12 +53,21 @@ p, .faq-answer, .commitment-item { text-wrap: pretty; }
 
 h1, h2, h3, h4 {
   text-wrap: balance;
-  font-family: "Sora", "Manrope", sans-serif;
-  font-weight: 700;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
-h1 { font-weight: 800; }
+h3 { letter-spacing: -0.02em; line-height: 1.25; }
+
+/* Mot accentué en serif italique (éditorial) */
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1em;
+  letter-spacing: -0.01em;
+}
 
 .container {
   max-width: var(--max-width);
@@ -103,7 +115,7 @@ section { position: relative; }
   justify-content: center;
   gap: 10px;
   padding: 14px 28px;
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: var(--radius);
@@ -227,18 +239,16 @@ body.has-custom-cursor .cursor-ring {
   width: 34px;
   height: 34px;
   border: 1.5px solid rgba(79, 141, 255, 0.5);
-  transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.25s var(--ease), background-color 0.25s var(--ease), opacity 0.2s var(--ease);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), background-color 0.25s var(--ease), opacity 0.2s var(--ease);
 }
 .cursor-ring.is-active {
-  width: 54px;
-  height: 54px;
+  transform: translate(-50%, -50%) scale(1.6);
   border-color: var(--accent);
   background: rgba(79, 141, 255, 0.1);
 }
 .cursor-ring.is-pressed {
-  width: 28px;
-  height: 28px;
+  transform: translate(-50%, -50%) scale(0.8);
 }
 
 @media (prefers-reduced-motion: reduce), (pointer: coarse) {
@@ -265,7 +275,7 @@ body.has-custom-cursor .cursor-ring {
   height: 76px;
 }
 .logo {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   font-size: 1.25rem;
   color: var(--text-dark);
@@ -298,12 +308,14 @@ body.has-custom-cursor .cursor-ring {
   position: absolute;
   left: 0;
   bottom: -6px;
-  width: 0;
+  width: 100%;
   height: 1px;
   background: var(--accent);
-  transition: width 0.25s var(--ease);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
 }
-.main-nav a:hover::after { width: 100%; }
+.main-nav a:hover::after { transform: scaleX(1); }
 
 .nav-toggle {
   display: none;
@@ -352,11 +364,15 @@ body.has-custom-cursor .cursor-ring {
 }
 .hero h1 .h1-thin {
   color: var(--text-dark-secondary);
-  font-weight: 300;
+  font-weight: 400;
 }
 .hero h1 .h1-accent {
   color: var(--accent);
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1em; /* le serif a une hauteur d'x plus faible que la grotesque */
+  letter-spacing: -0.01em;
 }
 .hero-subtitle {
   font-size: 1.15rem;
@@ -522,8 +538,12 @@ body.has-custom-cursor .cursor-ring {
   text-align: center;
 }
 .section-head h2 {
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: clamp(2rem, 3.6vw, 3rem);
 }
+.section-head h2 .serif,
+.cta-final h2 .serif { color: var(--accent-dim); }
+.bg-dark .section-head h2 .serif,
+.cta-final h2 .serif { color: var(--accent); }
 .section-head p {
   margin-top: var(--space-2);
   font-size: 1.05rem;
@@ -555,7 +575,7 @@ body.has-custom-cursor .cursor-ring {
   border-color: var(--accent-dim);
 }
 .problem-card .num {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   color: var(--accent-dim);
   font-weight: 700;
@@ -591,9 +611,11 @@ body.has-custom-cursor .cursor-ring {
   box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
 }
 .step .step-index {
-  font-family: "Manrope", sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1;
   color: var(--accent);
   display: block;
   margin-bottom: var(--space-2);
@@ -638,7 +660,7 @@ body.has-custom-cursor .cursor-ring {
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-3);
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   color: var(--accent-dim);
   transition: transform 0.3s var(--ease), background-color 0.3s var(--ease);
@@ -712,8 +734,8 @@ body.has-custom-cursor .cursor-ring {
   pointer-events: none;
 }
 .about-text { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.about-text h2 { margin-bottom: var(--space-3); }
-.about-text h2 .h2-thin { font-weight: 400; color: var(--text-light-secondary); }
+.about-text h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-bottom: var(--space-3); }
+.about-text h2 .h2-thin { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--text-light-secondary); }
 .about-text p { margin-bottom: var(--space-3); max-width: 520px; }
 
 .proof-row {
@@ -731,9 +753,11 @@ body.has-custom-cursor .cursor-ring {
 }
 .proof-item:hover { transform: translateY(-3px); }
 .proof-item .value {
-  font-family: "Manrope", sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.1;
   color: var(--accent-dim);
 }
 .proof-item .label {
@@ -781,7 +805,7 @@ body.has-custom-cursor .cursor-ring {
   background: none;
   border: none;
   text-align: left;
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-light);
@@ -825,7 +849,7 @@ body.has-custom-cursor .cursor-ring {
   padding: var(--space-7) 0;
 }
 .cta-final h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
   max-width: 700px;
   margin: 0 auto var(--space-3);
 }
@@ -867,6 +891,59 @@ body.has-custom-cursor .cursor-ring {
   font-size: 0.8rem;
   color: var(--text-dark-secondary);
   text-align: center;
+}
+
+/* ============================================================
+   Bandeau clients (défilement infini)
+   ============================================================ */
+.clients {
+  background: var(--bg-light);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--border-light);
+  overflow: hidden;
+}
+.clients-label {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--text-light-secondary);
+  margin-bottom: var(--space-4);
+}
+.marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-inner {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee-inner .client-logo { margin-right: var(--space-7); }
+.marquee:hover .marquee-inner { animation-play-state: paused; }
+/* 6 jeux de logos : translateX(-50%) retombe exactement sur le 4e jeu, d'où une boucle sans saut */
+@keyframes marquee { to { transform: translateX(-50%); } }
+.client-logo {
+  height: 68px;
+  width: auto;
+  flex-shrink: 0;
+  filter: grayscale(1) brightness(0.75) contrast(1.15);
+  opacity: 0.75;
+  transition: opacity 0.3s var(--ease), filter 0.3s var(--ease);
+}
+.client-logo:hover { opacity: 1; filter: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee-inner { animation: none; width: auto; justify-content: center; flex-wrap: wrap; gap: var(--space-5); }
+  .client-logo.dup { display: none; }
+}
+
+@media (max-width: 720px) {
+  .clients { padding: var(--space-4) 0; }
+  .clients-label { font-size: 1.05rem; margin-bottom: var(--space-3); }
+  .marquee-inner .client-logo { height: 52px; margin-right: var(--space-5); }
 }
 
 /* ============================================================
@@ -974,10 +1051,10 @@ body.has-custom-cursor .cursor-ring {
 
   .about-grid { gap: var(--space-3); }
   .about-photo { max-width: 220px; }
-  .about-text h2 { font-size: 1.3rem; }
+  .about-text h2 { font-size: 1.7rem; }
   .about-text h2 .h2-thin { display: block; font-size: 1.05rem; letter-spacing: 0; white-space: nowrap; }
   .about-text p { font-size: 0.92rem; }
-  .proof-item .value { font-size: 1.15rem; }
+  .proof-item .value { font-size: 1.8rem; }
   .commitments { margin-top: var(--space-3); gap: var(--space-2); }
   .commitment-item {
     display: block;
