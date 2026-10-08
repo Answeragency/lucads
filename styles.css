@@ -897,9 +897,10 @@ body.has-custom-cursor .cursor-ring {
    Bandeau clients (défilement infini)
    ============================================================ */
 .clients {
-  background: var(--bg-light);
+  background: var(--bg-dark);
   padding: var(--space-5) 0;
-  border-bottom: 1px solid var(--border-light);
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
   overflow: hidden;
 }
 .clients-label {
@@ -907,7 +908,7 @@ body.has-custom-cursor .cursor-ring {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.25rem;
-  color: var(--text-light-secondary);
+  color: var(--text-dark-secondary);
   margin-bottom: var(--space-4);
 }
 .marquee {
@@ -928,11 +929,14 @@ body.has-custom-cursor .cursor-ring {
   height: 68px;
   width: auto;
   flex-shrink: 0;
-  filter: grayscale(1) brightness(0.75) contrast(1.15);
-  opacity: 0.75;
+  /* logos sombres sur fond transparent -> rendus en blanc pour le fond noir */
+  filter: grayscale(1) invert(1) brightness(1.15);
+  opacity: 0.7;
   transition: opacity 0.3s var(--ease), filter 0.3s var(--ease);
 }
-.client-logo:hover { opacity: 1; filter: none; }
+.client-logo:hover { opacity: 1; }
+/* Bleu clair d'origine : trop terne une fois inversé */
+.client-logo[src$="pegasus-racing.png"] { filter: grayscale(1) invert(1) brightness(1.7); }
 /* Logos typographiques larges : réduits pour garder un poids visuel homogène */
 .marquee-inner .client-logo--wide { height: 44px; }
 .marquee-inner .client-logo[src$="puma.svg"] { height: 32px; } /* lettrage plein, très dense */
