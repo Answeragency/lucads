@@ -34,7 +34,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; interpolate-size: allow-keywords; }
 
 body {
   font-family: var(--font-sans);
@@ -125,7 +125,7 @@ section { position: relative; }
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0); }
+.btn:active { transform: scale(0.97); transition-duration: 0.1s; }
 .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .btn-primary {
@@ -175,7 +175,7 @@ section { position: relative; }
   justify-content: center;
   box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.45);
   transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-  animation: whatsapp-pulse 2.6s ease-in-out infinite;
+  animation: whatsapp-pulse 2.6s ease-in-out 3; /* attire l'oeil à l'arrivée, puis se calme */
   font-size: 1.7rem;
   line-height: 1;
 }
@@ -205,54 +205,38 @@ section { position: relative; }
 /* ============================================================
    Curseur personnalisé
    ============================================================ */
-body.has-custom-cursor,
-body.has-custom-cursor a,
-body.has-custom-cursor button,
-body.has-custom-cursor summary {
-  cursor: none;
-}
-
-.cursor-dot,
+/* Anneau qui accompagne le curseur natif (conservé pour garder la main sur les liens) */
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
-  border-radius: 50%;
+  width: 34px;
+  height: 34px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s var(--ease);
+  will-change: transform;
 }
-body.has-custom-cursor .cursor-dot,
-body.has-custom-cursor .cursor-ring {
-  opacity: 1;
-}
-
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-  transform: translate(-50%, -50%);
-}
-
-.cursor-ring {
-  width: 34px;
-  height: 34px;
+body.has-custom-cursor .cursor-ring { opacity: 1; }
+/* Le cercle visible est sur ::before : son échelle s'anime sans gêner le suivi image par image */
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
   border: 1.5px solid rgba(79, 141, 255, 0.5);
-  transform: translate(-50%, -50%) scale(1);
-  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), background-color 0.25s var(--ease), opacity 0.2s var(--ease);
+  transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), background-color 0.2s var(--ease);
 }
-.cursor-ring.is-active {
-  transform: translate(-50%, -50%) scale(1.6);
+.cursor-ring.is-active::before {
+  transform: scale(1.6);
   border-color: var(--accent);
   background: rgba(79, 141, 255, 0.1);
 }
-.cursor-ring.is-pressed {
-  transform: translate(-50%, -50%) scale(0.8);
-}
+.cursor-ring.is-pressed::before { transform: scale(0.8); }
 
 @media (prefers-reduced-motion: reduce), (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
+  .cursor-ring { display: none; }
 }
 
 /* ============================================================
@@ -340,10 +324,12 @@ body.has-custom-cursor .cursor-ring {
   background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79, 141, 255, 0.16), transparent), var(--bg-dark);
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 120px 0 var(--space-6);
+  padding: 120px 0 var(--space-4);
   overflow: hidden;
 }
+.hero > .hero-grid { margin-block: auto; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -491,20 +477,17 @@ body.has-custom-cursor .cursor-ring {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 0 rgba(79, 141, 255, 0.6);
-  animation: pulse-dot 2.2s ease-in-out infinite;
   flex-shrink: 0;
 }
 .hero-badge-1 {
   top: 10%;
   left: 10%;
   transform: translate(-50%, -50%);
-  animation: badge-float-1 5s ease-in-out infinite;
 }
 .hero-badge-2 {
   bottom: 10%;
   right: 10%;
   transform: translate(50%, 50%);
-  animation: badge-float-2 6s ease-in-out infinite;
 }
 
 @keyframes blob-float {
@@ -606,10 +589,6 @@ body.has-custom-cursor .cursor-ring {
   align-items: center;
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-.step:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
-}
 .step .step-index {
   font-family: var(--font-serif);
   font-style: italic;
@@ -648,8 +627,6 @@ body.has-custom-cursor .cursor-ring {
 }
 .service-card:hover {
   border-color: var(--accent-dim);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px -20px rgba(20, 22, 26, 0.2);
 }
 .service-card .icon {
   width: 40px;
@@ -751,7 +728,6 @@ body.has-custom-cursor .cursor-ring {
   text-align: center;
   transition: transform 0.3s var(--ease);
 }
-.proof-item:hover { transform: translateY(-3px); }
 .proof-item .value {
   font-family: var(--font-serif);
   font-style: italic;
@@ -822,22 +798,20 @@ body.has-custom-cursor .cursor-ring {
 .faq-item[open] .faq-question .plus { transform: rotate(45deg); }
 .faq-answer {
   --faq-pad-open: var(--space-3);
-  display: block;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  padding: 0;
   color: var(--text-light-secondary);
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
-  transition: max-height 0.4s var(--ease), opacity 0.3s var(--ease), padding 0.3s var(--ease);
 }
-.faq-item[open] .faq-answer {
-  max-height: 600px;
-  opacity: 1;
-  padding: 0 0 var(--faq-pad-open);
+.faq-answer > div::after { content: ""; display: block; height: var(--faq-pad-open); }
+/* Ouverture ET fermeture animées nativement (Chrome 131+, Safari 18.4+).
+   Ailleurs, la réponse s'ouvre et se ferme simplement sans animation. */
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 0.35s var(--ease), content-visibility 0.35s allow-discrete;
 }
+.faq-item[open]::details-content { block-size: auto; }
 .faq-item summary { list-style: none; }
 .faq-item summary::-webkit-details-marker { display: none; }
 
@@ -897,20 +871,44 @@ body.has-custom-cursor .cursor-ring {
    Bandeau clients (défilement infini)
    ============================================================ */
 .clients {
-  background: var(--bg-dark);
-  padding: var(--space-5) 0;
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
+  width: 100%;
+  margin-top: var(--space-6);
   overflow: hidden;
 }
 .clients-label {
   text-align: center;
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   color: var(--text-dark-secondary);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
+.clients-head {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.clients-head .clients-label { margin-bottom: 0; }
+/* Arrêt du défilement au clavier et au tactile (WCAG 2.2.2), pas seulement au survol */
+.marquee-toggle {
+  background: none;
+  border: none;
+  padding: 4px 6px;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--text-dark-secondary);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.7;
+  transition: opacity 0.2s var(--ease);
+}
+.marquee-toggle:hover { opacity: 1; }
+.marquee-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce) { .marquee-toggle { display: none; } }
+
 .marquee {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
@@ -921,12 +919,13 @@ body.has-custom-cursor .cursor-ring {
   width: max-content;
   animation: marquee 40s linear infinite;
 }
-.marquee-inner .client-logo { margin-right: var(--space-7); }
-.marquee:hover .marquee-inner { animation-play-state: paused; }
+.marquee-inner .client-logo { margin-right: var(--space-6); }
+.marquee:hover .marquee-inner,
+.clients.is-paused .marquee-inner { animation-play-state: paused; }
 /* 4 jeux de logos identiques : translateX(-50%) retombe exactement sur le 3e jeu, d'où une boucle sans saut */
 @keyframes marquee { to { transform: translateX(-50%); } }
 .client-logo {
-  height: 68px;
+  height: 48px;
   width: auto;
   flex-shrink: 0;
   /* logos sombres sur fond transparent -> rendus en blanc pour le fond noir */
@@ -938,8 +937,8 @@ body.has-custom-cursor .cursor-ring {
 /* Bleu clair d'origine : trop terne une fois inversé */
 .client-logo[src$="pegasus-racing.png"] { filter: grayscale(1) invert(1) brightness(1.7); }
 /* Logos typographiques larges : réduits pour garder un poids visuel homogène */
-.marquee-inner .client-logo--wide { height: 44px; }
-.marquee-inner .client-logo[src$="puma.svg"] { height: 32px; } /* lettrage plein, très dense */
+.marquee-inner .client-logo--wide { height: 32px; }
+.marquee-inner .client-logo[src$="puma.svg"] { height: 24px; } /* lettrage plein, très dense */
 
 @media (prefers-reduced-motion: reduce) {
   .marquee { -webkit-mask-image: none; mask-image: none; }
@@ -948,11 +947,11 @@ body.has-custom-cursor .cursor-ring {
 }
 
 @media (max-width: 720px) {
-  .clients { padding: var(--space-4) 0; }
-  .clients-label { font-size: 1.05rem; margin-bottom: var(--space-3); }
-  .marquee-inner .client-logo { height: 52px; margin-right: var(--space-5); }
-  .marquee-inner .client-logo--wide { height: 34px; }
-  .marquee-inner .client-logo[src$="puma.svg"] { height: 25px; }
+  .clients { margin-top: var(--space-4); }
+  .clients-label { font-size: 0.95rem; margin-bottom: var(--space-2); }
+  .marquee-inner .client-logo { height: 38px; margin-right: var(--space-5); }
+  .marquee-inner .client-logo--wide { height: 26px; }
+  .marquee-inner .client-logo[src$="puma.svg"] { height: 19px; }
 }
 
 /* ============================================================
@@ -973,7 +972,7 @@ body.has-custom-cursor .cursor-ring {
   .btn:hover, .service-card:hover, .problem-card:hover, .step:hover { transform: none; }
   .hero-photo-blob, .hero-photo-ring, .hero-photo-frame, .hero-badge-1, .hero-badge-2, .hero-badge-dot { animation: none; }
   .about-photo-blob, .about-photo-frame { animation: none; }
-  .faq-answer { transition: none; }
+  .faq-item::details-content { transition: none; }
   .hero-photo { transition: none; }
   html { scroll-behavior: auto; }
 }
@@ -984,7 +983,7 @@ body.has-custom-cursor .cursor-ring {
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; gap: var(--space-3); }
   .hero-photo { order: -1; max-width: 300px; margin-bottom: 0; }
-  .hero-badge { width: 78px; height: 78px; font-size: 0.62rem; padding: 8px; }
+  .hero-badge { width: 84px; height: 84px; font-size: 0.7rem; padding: 8px; }
   .problem-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1031,11 +1030,11 @@ body.has-custom-cursor .cursor-ring {
   }
   .hero-photo { max-width: 130px; margin: 0 auto; }
   .hero-grid { gap: var(--space-4); }
-  .hero-badge { width: 56px; height: 56px; font-size: 0.44rem; line-height: 1.05; padding: 5px; gap: 1px; }
+  .hero-badge { display: none; } /* trop petits pour être lisibles à cette taille */
   .hero-badge-dot { width: 4px; height: 4px; }
   .hero-badge-1 { top: 14%; left: 14%; }
   .hero-badge-2 { bottom: 14%; right: 14%; }
-  .eyebrow { margin-bottom: var(--space-2); font-size: 0.52rem; letter-spacing: 0.02em; white-space: nowrap; }
+  .eyebrow { margin-bottom: var(--space-2); font-size: 0.7rem; letter-spacing: 0.02em; white-space: nowrap; }
   .hero h1 { font-size: 1.6rem; margin-bottom: var(--space-2); }
   .hero-subtitle { font-size: 0.84rem; max-width: none; margin-bottom: var(--space-2); }
   .hero-cta-group { flex-direction: column; align-items: center; gap: var(--space-2); }

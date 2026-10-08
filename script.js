@@ -41,36 +41,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Curseur personnalisé (point + anneau qui suit avec un léger effet de traîne) ---
+  // --- Anneau qui accompagne le curseur natif ---
+  // Le curseur natif reste visible (main sur les liens) ; l'anneau suit avec un léger lissage.
   const canCustomCursor = !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches;
+  const cursorRing = document.querySelector('.cursor-ring');
 
-  if (canCustomCursor) {
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorRing = document.querySelector('.cursor-ring');
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
+  if (canCustomCursor && cursorRing) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let ringX = 0;
+    let ringY = 0;
 
     window.addEventListener('mousemove', (e) => {
-      // Affiché seulement après le premier mouvement, sinon l'anneau reste figé au centre
       if (!document.body.classList.contains('has-custom-cursor')) {
+        // premier mouvement : on part de la souris, pas du coin de l'écran
         ringX = e.clientX;
         ringY = e.clientY;
         document.body.classList.add('has-custom-cursor');
       }
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
     });
 
     const animateRing = () => {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
+      ringX += (mouseX - ringX) * 0.35;
+      ringY += (mouseY - ringY) * 0.35;
+      // transform plutôt que left/top : pas de recalcul de mise en page à chaque image
+      cursorRing.style.transform = `translate3d(${ringX - 17}px, ${ringY - 17}px, 0)`;
       requestAnimationFrame(animateRing);
     };
     requestAnimationFrame(animateRing);
@@ -84,13 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.addEventListener('mousedown', () => cursorRing.classList.add('is-pressed'));
     document.addEventListener('mouseup', () => cursorRing.classList.remove('is-pressed'));
-    document.addEventListener('mouseleave', () => {
-      cursorDot.style.opacity = '0';
-      cursorRing.style.opacity = '0';
-    });
-    document.addEventListener('mouseenter', () => {
-      cursorDot.style.opacity = '1';
-      cursorRing.style.opacity = '1';
+    document.documentElement.addEventListener('mouseleave', () => { cursorRing.style.opacity = '0'; });
+    document.documentElement.addEventListener('mouseenter', () => { cursorRing.style.opacity = ''; });
+  }
+
+  // --- Pause du bandeau clients (clavier et tactile, pas seulement au survol) ---
+  const clients = document.querySelector('.clients');
+  const marqueeToggle = document.querySelector('.marquee-toggle');
+  if (clients && marqueeToggle) {
+    marqueeToggle.addEventListener('click', () => {
+      const paused = clients.classList.toggle('is-paused');
+      marqueeToggle.setAttribute('aria-pressed', String(paused));
+      marqueeToggle.textContent = paused ? 'Reprendre' : 'Mettre en pause';
     });
   }
 
