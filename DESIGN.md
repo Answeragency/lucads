@@ -44,6 +44,12 @@ typography:
     fontSize: "0.875rem"
     fontWeight: 400
     lineHeight: 1.5
+  logo:
+    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 700
+    lineHeight: 1.6
+    letterSpacing: "-0.02em"
   label:
     fontFamily: "IBM Plex Mono, ui-monospace, monospace"
     fontSize: "0.75rem"
@@ -110,6 +116,7 @@ Deux polices, hébergées sur le site (`assets/fonts/`, aucun appel à Google) :
 | Titre principal (h1) | clamp(2.25rem, 5vw, 3.5rem) | 700 | 1.08 | -0.03em |
 | Titre de section (h2) | clamp(1.75rem, 3.2vw, 2.5rem) | 700 | 1.15 | -0.02em |
 | Titre de carte (h3) | 1.125rem | 700 | 1.3 | 0 |
+| Logo texte « LucAds » | 1.25rem | 700 | 1.6 | -0.02em |
 | Chapeau | 1.125rem | 400 | 1.55 | 0 |
 | Texte | 1rem | 400 | 1.6 | 0 |
 | Petit texte | 0.875rem | 400 | 1.5 | 0 |
